@@ -45,9 +45,10 @@ const questions = [
   },
 ];
 
-//seting global variables
+//setting global variables
 const startBtnElement = document.getElementById("startBtn");
 const questionContainerElement = document.getElementById("question-container");
+//changied question Element from const to var and back to const
 const questionElement = document.getElementById("question");
 const btnGridElement = document.getElementById("btnGrid");
 const correctEl = document.querySelector("#trueBtn");
@@ -58,10 +59,14 @@ let answer;
 var score = 0;
 var timeLeft;
 
-//timer
+//question
+// var questionIndex holds total number of questions
+var questionIndex = questions.length;
 
 var timerEl = document.getElementById("timer");
 
+
+//countdown timer
 function countdown() {
   var timeLeft = 85;
 
@@ -109,16 +114,29 @@ function startGame() {
   //hides start button after it is clicked
   startBtn.classList.add("hide");
 
-   //shows question and true false buttons after start is clicked
+  //shows question and true false buttons after start is clicked
   questionContainerElement.classList.remove("hide");
 
- /* // loop
+ /*  console.log(questions[2].prompt);
+  questionElement.textContent = questions[questionIndex - 1].prompt;
+  console.log(questionElement.textContent);
+  console.log(questionIndex); */
+ 
+ }
+/*  // loop
   for (let gameState = 0; timeLeft > 0; gameState++) {
-    //push question
+    if (timeLeft > 0 && questionIndex > 1) {
+newQuestion(questionIndex);
+    }
     
     //listen for answer
 
     //check answer
 
-    //push new question */
+    //push new question
 }
+*/
+function setNextQuestion() {
+questionElement.innerText = questions[questionIndex - 1].prompt;
+}  //show question
+//function showQuestion(question);
