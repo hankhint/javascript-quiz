@@ -24,7 +24,10 @@ A future version will include implementation of features 2 - 5.  The logic is a 
 
 
 ## Screenshot
+![image](https://user-images.githubusercontent.com/50533231/137669140-11ae84b8-2b8e-41a6-af4a-c9500da23299.png)
 
 ## Link to the deployed site
+
+https://hankhint.github.io/jsquiz/
 
 
