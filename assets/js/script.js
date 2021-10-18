@@ -65,7 +65,6 @@ var questionIndex = questions.length;
 
 var timerEl = document.getElementById("timer");
 
-
 //countdown timer
 function countdown() {
   var timeLeft = 85;
@@ -96,7 +95,7 @@ function countdown() {
 
 startBtn.addEventListener("click", () => {
   countdown();
- startGame();
+  startGame();
 });
 
 // Attach event listener to TRUE button element
@@ -117,13 +116,8 @@ function startGame() {
   //shows question and true false buttons after start is clicked
   questionContainerElement.classList.remove("hide");
 
- /*  console.log(questions[2].prompt);
-  questionElement.textContent = questions[questionIndex - 1].prompt;
-  console.log(questionElement.textContent);
-  console.log(questionIndex); */
- 
- }
-/*  // loop
+  setNextQuestion();
+  /*  // loop
   for (let gameState = 0; timeLeft > 0; gameState++) {
     if (timeLeft > 0 && questionIndex > 1) {
 newQuestion(questionIndex);
@@ -133,10 +127,10 @@ newQuestion(questionIndex);
 
     //check answer
 
-    //push new question
+    //push new question*/
 }
-*/
+
 function setNextQuestion() {
-questionElement.innerText = questions[questionIndex - 1].prompt;
-}  //show question
+  questionElement.innerText = questions[questionIndex - 1].prompt;
+} //show question
 //function showQuestion(question);
