@@ -2,7 +2,10 @@
 A timed quiz for javascript made in javascript
 
 ## Description
-A timed quiz with questions about javascript
+Click the start button and you will be asked questions about javascript.
+You have 85 seconds to finish.
+If you answer incorrectly you will lose time.
+When the game is over you can save your initials and your score.
 
 ## Future version
 A future version will include implementation of features 2 - 5.  The logic is a work in progress.
