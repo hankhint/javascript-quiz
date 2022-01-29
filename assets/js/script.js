@@ -48,7 +48,7 @@ const questions = [
 //setting global variables
 const startBtnElement = document.getElementById("startBtn");
 const questionContainerElement = document.getElementById("question-container");
-//changied question Element from const to var and back to const
+//changed question Element from const to var and back to const
 const questionElement = document.getElementById("question");
 const btnGridElement = document.getElementById("btnGrid");
 const correctEl = document.querySelector("#trueBtn");
