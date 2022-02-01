@@ -99,7 +99,6 @@ function countdown() {
 }
 
 // Listens for the start button to be clicked, starts countdown and game
-
 startBtn.addEventListener("click", () => {
   countdown();
   startGame();
@@ -121,23 +120,25 @@ correctEl.addEventListener("click", function () {
   if (answer == questions[questionIndex - 1].answer) {
     score++;
     questionIndex--;
+
      //if there are no more questions, end game
   if (questionIndex == 0) {
     endGame();
+    break;
   }
     document.getElementById("question").innerHTML =
       questions[questionIndex - 1].prompt;
-    console.log(score);
+  
   }
   //if the user input is the incorrect answer
   //subtract five seconds from the timer, decrement the questionIndex and posit a new question
   else {
-    console.log("incorrect answer");
     timeLeft = timeLeft - 5;
     questionIndex--;
      //if there are no more questions, end game
   if (questionIndex == 0) {
     endGame();
+    break;
   }
     document.getElementById("question").innerHTML =
       questions[questionIndex - 1].prompt;
@@ -147,30 +148,33 @@ correctEl.addEventListener("click", function () {
 // Attach event listener to FALSE button element
 incorrectEl.addEventListener("click", function () {
 
- 
-
   //if the user input is the correct answer
   //then increase the score, decrement the questionIndex and posit a new question
   answer = "incorrect";
   if (answer == questions[questionIndex - 1].answer) {
     score++;
     questionIndex--;
+
      //if there are no more questions, end game
   if (questionIndex == 0) {
     endGame();
+    break;
   }
     document.getElementById("question").innerHTML =
       questions[questionIndex - 1].prompt;
   }
+
   //if the user input is the incorrect answer
   //subtract five seconds from the timer, decrement the questionIndex and posit a new question
   else {
     console.log("incorrect answer");
     timeLeft = timeLeft - 5;
     questionIndex--;
+
      //if there are no more questions, end game
   if (questionIndex == 0) {
     endGame();
+    break;
   }
     document.getElementById("question").innerHTML =
       questions[questionIndex - 1].prompt;
@@ -206,5 +210,5 @@ function endGame() {
   localStorageFeatureElement.classList.remove("hide");
 
   //reset game timer variable so that the countdown starts again when player replays game
-  timeLeft = 85;
+  
 }
