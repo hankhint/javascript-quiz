@@ -1,4 +1,4 @@
-// Quiz Questions
+//START Quiz Questions
 const questions = [
   {
     prompt: "Javascript first appeared in 1995",
@@ -44,6 +44,7 @@ const questions = [
     answer: "correct",
   },
 ];
+//END QUIZ QUESTIONS
 
 //setting global variables
 const startBtnElement = document.getElementById("startBtn");
@@ -54,10 +55,10 @@ const btnGridElement = document.getElementById("btnGrid");
 const correctEl = document.querySelector("#trueBtn");
 const incorrectEl = document.querySelector("#falseBtn");
 
-// timer
+// initializing variables for userinput answer, score, and timer
 let answer;
 var score = 0;
-var timeLeft;
+var timeLeft = 85;
 
 //question
 // var questionIndex holds total number of questions
@@ -67,28 +68,35 @@ var timerEl = document.getElementById("timer");
 
 //countdown timer
 function countdown() {
-  var timeLeft = 85;
 
   // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
   var timeInterval = setInterval(function () {
+   
     // As long as the `timeLeft` is greater than 1
     if (timeLeft > 1) {
+    
       // Set the `textContent` of `timerEl` to show the remaining seconds
       timerEl.textContent = timeLeft + " seconds remaining";
+    
       // Decrement `timeLeft` by 1
       timeLeft--;
     } else if (timeLeft === 1) {
+    
       // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
       timerEl.textContent = timeLeft + " second remaining";
       timeLeft--;
     } else {
+     
       // Once `timeLeft` gets to 0, set `timerEl` to an empty string
-      console.log(timeLeft);
+   //   console.log(timeLeft);
       timerEl.textContent = "Time is up.";
+     
       // Use `clearInterval()` to stop the timer
       clearInterval(timeInterval);
+     // console.log(timeLeft);
     }
   }, 1000);
+ // console.log(timeLeft);
 }
 
 // Listens for the start button to be clicked, starts countdown and game
@@ -100,12 +108,45 @@ startBtn.addEventListener("click", () => {
 
 // Attach event listener to TRUE button element
 correctEl.addEventListener("click", function () {
+  //user input submits answer to question
   answer = "correct";
+  // console.log(score);
+  // console.log(questions[questionIndex - 1].answer);
+  // console.log(questionIndex - 1);
+  if (answer == questions[questionIndex - 1].answer) {
+    score++;
+    questionIndex--;
+    document.getElementById("question").innerHTML = questions[questionIndex - 1].prompt; 
+    console.log(score);
+  }
+  else {
+    console.log("incorrect answer")
+    timeLeft = timeLeft - 5;
+    questionIndex--;
+    document.getElementById("question").innerHTML = questions[questionIndex - 1].prompt;
+  }
 });
 
 // Attach event listener to FALSE button element
 incorrectEl.addEventListener("click", function () {
+
+  //if the user input is the correct answer
+  //then increase the score, decrement the questionIndex and posit a new question
   answer = "incorrect";
+  if (answer == questions[questionIndex - 1].answer) {
+    score++;
+    questionIndex--;
+    document.getElementById("question").innerHTML = questions[questionIndex - 1].prompt;
+    console.log(score);
+  }
+  //if the user input is the incorrect answer
+  //subtract five seconds from the timer, decrement the questionIndex and posit a new question
+  else {
+    console.log("incorrect answer")
+    timeLeft = timeLeft - 5;
+    questionIndex--;
+    document.getElementById("question").innerHTML = questions[questionIndex - 1].prompt;
+  }
 });
 
 // Starts the game
@@ -115,8 +156,14 @@ function startGame() {
 
   //shows question and true false buttons after start is clicked
   questionContainerElement.classList.remove("hide");
+  console.log(questions[questionIndex - 1].prompt);
 
-  setNextQuestion();
+
+  //document.getElementById("p1").innerHTML = "New text!";
+  //displays first question
+  document.getElementById("question").innerHTML = questions[questionIndex - 1].prompt;
+ // questionElement.innerHTML(questions[questionIndex - 1].prompt);
+  //  setNextQuestion();
   /*  // loop
   for (let gameState = 0; timeLeft > 0; gameState++) {
     if (timeLeft > 0 && questionIndex > 1) {
@@ -128,9 +175,17 @@ newQuestion(questionIndex);
     //check answer
 
     //push new question*/
-}
+  //}
 
-function setNextQuestion() {
-  questionElement.innerText = questions[questionIndex - 1].prompt;
+  // function setNextQuestion() {
+  //   questionElement.innerText = questions[questionIndex - 1].prompt;
+  //   questionIndex-- ;
 } //show question
 //function showQuestion(question);
+
+function endGame() {
+  questionContainerElement.classList.add("hide");
+  startBtn.classList.remove("hide");
+  
+
+} 
