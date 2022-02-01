@@ -58,7 +58,7 @@ const incorrectEl = document.querySelector("#falseBtn");
 // timer
 let answer;
 var score = 0;
-var timeLeft;
+var timeLeft = 85;
 
 //question
 // var questionIndex holds total number of questions
@@ -68,7 +68,6 @@ var timerEl = document.getElementById("timer");
 
 //countdown timer
 function countdown() {
-  var timeLeft = 85;
 
   // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
   var timeInterval = setInterval(function () {
@@ -89,15 +88,15 @@ function countdown() {
     } else {
      
       // Once `timeLeft` gets to 0, set `timerEl` to an empty string
-      console.log(timeLeft);
+   //   console.log(timeLeft);
       timerEl.textContent = "Time is up.";
      
       // Use `clearInterval()` to stop the timer
       clearInterval(timeInterval);
-      console.log(timeLeft);
+     // console.log(timeLeft);
     }
   }, 1000);
-  console.log(timeLeft);
+ // console.log(timeLeft);
 }
 
 // Listens for the start button to be clicked, starts countdown and game
