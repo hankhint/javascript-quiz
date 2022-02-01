@@ -55,7 +55,7 @@ const btnGridElement = document.getElementById("btnGrid");
 const correctEl = document.querySelector("#trueBtn");
 const incorrectEl = document.querySelector("#falseBtn");
 
-// timer
+// initializing variables for userinput answer, score, and timer
 let answer;
 var score = 0;
 var timeLeft = 85;
@@ -129,6 +129,9 @@ correctEl.addEventListener("click", function () {
 
 // Attach event listener to FALSE button element
 incorrectEl.addEventListener("click", function () {
+
+  //if the user input is the correct answer
+  //then increase the score, decrement the questionIndex and posit a new question
   answer = "incorrect";
   if (answer == questions[questionIndex - 1].answer) {
     score++;
@@ -136,6 +139,8 @@ incorrectEl.addEventListener("click", function () {
     document.getElementById("question").innerHTML = questions[questionIndex - 1].prompt;
     console.log(score);
   }
+  //if the user input is the incorrect answer
+  //subtract five seconds from the timer, decrement the questionIndex and posit a new question
   else {
     console.log("incorrect answer")
     timeLeft = timeLeft - 5;
@@ -177,3 +182,10 @@ newQuestion(questionIndex);
   //   questionIndex-- ;
 } //show question
 //function showQuestion(question);
+
+function endGame() {
+  questionContainerElement.classList.add("hide");
+  startBtn.classList.remove("hide");
+  
+
+} 
