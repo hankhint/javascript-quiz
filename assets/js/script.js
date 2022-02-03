@@ -17,7 +17,7 @@ const questions = [
     answer: "correct",
   },
   {
-    prompt: "the <link> tag is used to link the HTML to the javascript file",
+    prompt: "the link tag is used to link the HTML to the javascript file",
     answer: "incorrect",
     /* <script> tag is used */
   },
@@ -106,9 +106,8 @@ startBtn.addEventListener("click", () => {
 
 // Attach event listener to TRUE button element
 correctEl.addEventListener("click", function () {
-
   //if there are no more questions, end game
-  if ( questionIndex == 0) {
+  if (questionIndex == 0) {
     endGame();
   }
 
@@ -121,33 +120,31 @@ correctEl.addEventListener("click", function () {
     score++;
     questionIndex--;
 
-     //if there are no more questions, end game
-  if (questionIndex == 0) {
-    endGame();
-    break;
-  }
-    document.getElementById("question").innerHTML =
-      questions[questionIndex - 1].prompt;
-  
+    //if there are no more questions, end game
+    if (questionIndex == 0) {
+      endGame();
+    } else {
+      document.getElementById("question").innerHTML =
+        questions[questionIndex - 1].prompt;
+    }
   }
   //if the user input is the incorrect answer
   //subtract five seconds from the timer, decrement the questionIndex and posit a new question
   else {
     timeLeft = timeLeft - 5;
     questionIndex--;
-     //if there are no more questions, end game
-  if (questionIndex == 0) {
-    endGame();
-    break;
-  }
-    document.getElementById("question").innerHTML =
-      questions[questionIndex - 1].prompt;
+    //if there are no more questions, end game
+    if (questionIndex == 0) {
+      endGame();
+    } else {
+      document.getElementById("question").innerHTML =
+        questions[questionIndex - 1].prompt;
+    }
   }
 });
 
 // Attach event listener to FALSE button element
 incorrectEl.addEventListener("click", function () {
-
   //if the user input is the correct answer
   //then increase the score, decrement the questionIndex and posit a new question
   answer = "incorrect";
@@ -155,13 +152,13 @@ incorrectEl.addEventListener("click", function () {
     score++;
     questionIndex--;
 
-     //if there are no more questions, end game
-  if (questionIndex == 0) {
-    endGame();
-    break;
-  }
-    document.getElementById("question").innerHTML =
-      questions[questionIndex - 1].prompt;
+    //if there are no more questions, end game
+    if (questionIndex == 0) {
+      endGame();
+    } else {
+      document.getElementById("question").innerHTML =
+        questions[questionIndex - 1].prompt;
+    }
   }
 
   //if the user input is the incorrect answer
@@ -171,13 +168,13 @@ incorrectEl.addEventListener("click", function () {
     timeLeft = timeLeft - 5;
     questionIndex--;
 
-     //if there are no more questions, end game
-  if (questionIndex == 0) {
-    endGame();
-    break;
-  }
-    document.getElementById("question").innerHTML =
-      questions[questionIndex - 1].prompt;
+    //if there are no more questions, end game
+    if (questionIndex == 0) {
+      endGame();
+    } else {
+      document.getElementById("question").innerHTML =
+        questions[questionIndex - 1].prompt;
+    }
   }
 });
 
@@ -189,7 +186,6 @@ function startGame() {
   //shows question and true false buttons after start is clicked
   localStorageFeatureElement.classList.add("hide");
   questionContainerElement.classList.remove("hide");
-  console.log(questions[questionIndex - 1].prompt);
 
   //document.getElementById("p1").innerHTML = "New text!";
   //displays first question
@@ -197,8 +193,7 @@ function startGame() {
     questions[questionIndex - 1].prompt;
 }
 
-
-    //end game function hides questions, stops timer, presents local storage feature, and displays the start button
+//end game function hides questions, stops timer, presents local storage feature, and displays the start button
 function endGame() {
   //hide the question Element, which includes buttons
   questionContainerElement.classList.add("hide");
@@ -209,6 +204,14 @@ function endGame() {
   //unhides the localStorageFeature
   localStorageFeatureElement.classList.remove("hide");
 
-  //reset game timer variable so that the countdown starts again when player replays game
-  
+  // TODO: read high scores from local storage
+  // check localStorage for high score, if it's not there, use 0
+  var highScore = localStorage.getItem("highscore");
+  if (highScore === null) {
+    highScore = 0;
+  }
+
+  // TODO: push list of high scores to html
+
+  // TODO: Create Html input for player's highscore
 }
