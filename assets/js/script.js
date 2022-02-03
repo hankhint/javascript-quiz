@@ -210,6 +210,8 @@ function endGame() {
   if (highScore === null) {
     highScore = 0;
   }
+  //TODO: reset question index
+  clearTimeout
 
   // TODO: push list of high scores to html
 
