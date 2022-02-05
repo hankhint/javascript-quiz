@@ -72,6 +72,8 @@ var timerEl = document.getElementById("timer");
 //countdown timer
 function countdown() {
   // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+  //TODO: Need to make timeInterval a global variable
+  //TODO: call clear interval in a endGame function
   var timeInterval = setInterval(function () {
     // As long as the `timeLeft` is greater than 1
     if (timeLeft > 1) {
@@ -124,7 +126,7 @@ correctEl.addEventListener("click", function () {
      //if there are no more questions, end game
   if (questionIndex == 0) {
     endGame();
-    break;
+    return;
   }
     document.getElementById("question").innerHTML =
       questions[questionIndex - 1].prompt;
@@ -138,7 +140,7 @@ correctEl.addEventListener("click", function () {
      //if there are no more questions, end game
   if (questionIndex == 0) {
     endGame();
-    break;
+    return;
   }
     document.getElementById("question").innerHTML =
       questions[questionIndex - 1].prompt;
@@ -158,7 +160,7 @@ incorrectEl.addEventListener("click", function () {
      //if there are no more questions, end game
   if (questionIndex == 0) {
     endGame();
-    break;
+    return;
   }
     document.getElementById("question").innerHTML =
       questions[questionIndex - 1].prompt;
@@ -174,7 +176,7 @@ incorrectEl.addEventListener("click", function () {
      //if there are no more questions, end game
   if (questionIndex == 0) {
     endGame();
-    break;
+    return;
   }
     document.getElementById("question").innerHTML =
       questions[questionIndex - 1].prompt;
@@ -209,6 +211,6 @@ function endGame() {
   //unhides the localStorageFeature
   localStorageFeatureElement.classList.remove("hide");
 
-  //reset game timer variable so that the countdown starts again when player replays game
+  //TODO: reset game timer variable so that the countdown starts again when player replays game
   
 }
