@@ -58,17 +58,17 @@ const correctEl = document.querySelector("#trueBtn");
 const incorrectEl = document.querySelector("#falseBtn");
 const scoreEl = document.getElementById("score");
 var timerEl = document.getElementById("timer");
-console.log("this is timerEl", timerEl)
 // initializing variables for userinput answer, score, and timer
 let answer;
 var score = 0;
 var timeLeft = 85;
 // var questionIndex holds total number of questions
 var questionIndex = questions.length;
+var myInterval;
 
 // Listens for the start button to be clicked, starts countdown and game
 startBtn.addEventListener("click", () => {
-  myTimer();
+  myInterval = setInterval(myTimer, 1000);
   startGame();
 });
 
@@ -94,7 +94,6 @@ correctEl.addEventListener("click", function () {
 
     //if there are no more questions, end game
     if (questionIndex == 0) {
-      console.log("no more questions", questionIndex);
 
       endGame();
       return;
@@ -133,7 +132,6 @@ incorrectEl.addEventListener("click", function () {
 
     //if there are no more questions, end game
     if (questionIndex == 0) {
-
       endGame();
       return;
     }
@@ -144,7 +142,6 @@ incorrectEl.addEventListener("click", function () {
   //if the user input is the incorrect answer
   //subtract five seconds from the timer, decrement the questionIndex and posit a new question
   else {
-    console.log("incorrect answer");
     timeLeft = timeLeft - 5;
     questionIndex--;
 
@@ -166,9 +163,9 @@ incorrectEl.addEventListener("click", function () {
 
 //countdown timer
 function myTimer() {
-  console.log("myTimer function has been called");
   // As long as the `timeLeft` is greater than 1
   if (timeLeft > 1) {
+    //  console.log("the timer is at", timeLeft)
     // Set the `textContent` of `timerEl` to show the remaining seconds
     timerEl.innerHTML = timeLeft + " seconds remaining";
 
@@ -184,12 +181,7 @@ function myTimer() {
 
     //end game
     endGame();
-  }
-  console.log("timeleft", timeLeft);
-}
-
-var myInterval = setInterval(myTimer, 1000);
-var clearFunction = clearInterval(myInterval);
+  }}
 
 // Starts the game
 function startGame() {
@@ -199,11 +191,9 @@ function startGame() {
   //shows question and true false buttons after start is clicked
   localStorageFeatureElement.classList.add("hide");
   questionContainerElement.classList.remove("hide");
+  scoreEl.classList.add("hide");
 
   timerEl.classList.remove("hide");
-  console.log(questions[questionIndex - 1].prompt);
-
-  //document.getElementById("p1").innerHTML = "New text!";
   //displays first question
   document.getElementById("question").innerHTML =
     questions[questionIndex - 1].prompt;
@@ -215,8 +205,8 @@ function endGame() {
   questionContainerElement.classList.add("hide");
 
   //posts score
-scoreEl.classList.remove("hide");
-document.getElementById("score").innerHTML = score; 
+  scoreEl.classList.remove("hide");
+  document.getElementById("score").innerHTML = "your score is " + score;
   //unhides the start button
   startBtn.classList.remove("hide");
 
@@ -227,7 +217,7 @@ document.getElementById("score").innerHTML = score;
   localStorageFeatureElement.classList.remove("hide");
 
   //TODO: reset game timer variable so that the countdown starts again when player replays game
-  clearFunction;
+  clearInterval(myInterval);
   score = 0;
   timeLeft = 85;
   questionIndex = questions.length;
