@@ -7,7 +7,6 @@ const questions = [
   {
     prompt: "Event bubbling and event capturing are the same",
     answer: "incorrect",
-
     /*With bubbling, the event is first captured and handled by the innermost element and then propagated to outer elements.
     
          With capturing, the event is first captured by the outermost element and propagated to the inner elements.*/
@@ -45,11 +44,11 @@ const questions = [
   },
 ];
 //END QUIZ QUESTIONS
+//----------------------------------------------------------------------------
 
 //setting global variables
 const startBtnElement = document.getElementById("startBtn");
 const questionContainerElement = document.getElementById("question-container");
-//changed question Element from const to var and back to const
 const questionElement = document.getElementById("question");
 const btnGridElement = document.getElementById("btnGrid");
 const localStorageFeatureElement = document.getElementById(
@@ -57,61 +56,31 @@ const localStorageFeatureElement = document.getElementById(
 );
 const correctEl = document.querySelector("#trueBtn");
 const incorrectEl = document.querySelector("#falseBtn");
-
+const scoreEl = document.getElementById("score");
+var timerEl = document.getElementById("timer");
+console.log("this is timerEl", timerEl)
 // initializing variables for userinput answer, score, and timer
 let answer;
 var score = 0;
 var timeLeft = 85;
-
-//question
 // var questionIndex holds total number of questions
 var questionIndex = questions.length;
 
-var timerEl = document.getElementById("timer");
-
-//countdown timer
-function countdown() {
-  // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-  //TODO: Need to make timeInterval a global variable
-  //TODO: call clear interval in a endGame function
-  var timeInterval = setInterval(function () {
-    // As long as the `timeLeft` is greater than 1
-    if (timeLeft > 1) {
-      // Set the `textContent` of `timerEl` to show the remaining seconds
-      timerEl.textContent = timeLeft + " seconds remaining";
-
-      // Decrement `timeLeft` by 1
-      timeLeft--;
-    } else if (timeLeft === 1) {
-      // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
-      timerEl.textContent = timeLeft + " second remaining";
-      timeLeft--;
-    } else {
-      // Once `timeLeft` gets to 0, set `timerEl` to time is up to tell user game is over
-      timerEl.textContent = "Time is up.";
-
-      // Use `clearInterval()` to stop the timer
-      clearInterval(timeInterval);
-
-      //end game
-      endGame();
-    }
-  }, 1000);
-  // console.log(timeLeft);
-}
-
 // Listens for the start button to be clicked, starts countdown and game
 startBtn.addEventListener("click", () => {
-  countdown();
+  myTimer();
   startGame();
 });
 
+//---------------------------------------------------
+//START: TRUE BUTTON LOGIC
+
 // Attach event listener to TRUE button element
 correctEl.addEventListener("click", function () {
-
   //if there are no more questions, end game
-  if ( questionIndex == 0) {
+  if (questionIndex == 0) {
     endGame();
+    return;
   }
 
   //user input submits answer to question
@@ -123,33 +92,38 @@ correctEl.addEventListener("click", function () {
     score++;
     questionIndex--;
 
-     //if there are no more questions, end game
-  if (questionIndex == 0) {
-    endGame();
-    return;
-  }
+    //if there are no more questions, end game
+    if (questionIndex == 0) {
+      console.log("no more questions", questionIndex);
+
+      endGame();
+      return;
+    }
     document.getElementById("question").innerHTML =
       questions[questionIndex - 1].prompt;
-  
   }
   //if the user input is the incorrect answer
   //subtract five seconds from the timer, decrement the questionIndex and posit a new question
   else {
     timeLeft = timeLeft - 5;
     questionIndex--;
-     //if there are no more questions, end game
-  if (questionIndex == 0) {
-    endGame();
-    return;
-  }
+    //if there are no more questions, end game
+    if (questionIndex == 0) {
+      endGame();
+      return;
+    }
     document.getElementById("question").innerHTML =
       questions[questionIndex - 1].prompt;
   }
 });
+//END: TRUE BUTTON LOGIC
+//------------------------------------------------
+
+//------------------------------------------------
+//START: FALSE BUTTON LOGIC
 
 // Attach event listener to FALSE button element
 incorrectEl.addEventListener("click", function () {
-
   //if the user input is the correct answer
   //then increase the score, decrement the questionIndex and posit a new question
   answer = "incorrect";
@@ -157,11 +131,12 @@ incorrectEl.addEventListener("click", function () {
     score++;
     questionIndex--;
 
-     //if there are no more questions, end game
-  if (questionIndex == 0) {
-    endGame();
-    return;
-  }
+    //if there are no more questions, end game
+    if (questionIndex == 0) {
+
+      endGame();
+      return;
+    }
     document.getElementById("question").innerHTML =
       questions[questionIndex - 1].prompt;
   }
@@ -173,15 +148,48 @@ incorrectEl.addEventListener("click", function () {
     timeLeft = timeLeft - 5;
     questionIndex--;
 
-     //if there are no more questions, end game
-  if (questionIndex == 0) {
-    endGame();
-    return;
-  }
+    //if there are no more questions, end game
+    if (questionIndex == 0) {
+      endGame();
+      return;
+    }
     document.getElementById("question").innerHTML =
       questions[questionIndex - 1].prompt;
   }
 });
+
+//END: FALSE BUTTON LOGIC
+//--------------------------------------------------
+
+//setting interval outside of function
+// Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+
+//countdown timer
+function myTimer() {
+  console.log("myTimer function has been called");
+  // As long as the `timeLeft` is greater than 1
+  if (timeLeft > 1) {
+    // Set the `textContent` of `timerEl` to show the remaining seconds
+    timerEl.innerHTML = timeLeft + " seconds remaining";
+
+    // Decrement `timeLeft` by 1
+    timeLeft--;
+  } else if (timeLeft === 1) {
+    // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
+    timerEl.innerHTML = timeLeft + " second remaining";
+    timeLeft--;
+  } else {
+    // Once `timeLeft` gets to 0, set `timerEl` to time is up to tell user game is over
+    timerEl.innerHTML = "Time is up.";
+
+    //end game
+    endGame();
+  }
+  console.log("timeleft", timeLeft);
+}
+
+var myInterval = setInterval(myTimer, 1000);
+var clearFunction = clearInterval(myInterval);
 
 // Starts the game
 function startGame() {
@@ -191,6 +199,8 @@ function startGame() {
   //shows question and true false buttons after start is clicked
   localStorageFeatureElement.classList.add("hide");
   questionContainerElement.classList.remove("hide");
+
+  timerEl.classList.remove("hide");
   console.log(questions[questionIndex - 1].prompt);
 
   //document.getElementById("p1").innerHTML = "New text!";
@@ -199,18 +209,26 @@ function startGame() {
     questions[questionIndex - 1].prompt;
 }
 
-
-    //end game function hides questions, stops timer, presents local storage feature, and displays the start button
+//end game function hides questions, stops timer, presents local storage feature, and displays the start button
 function endGame() {
   //hide the question Element, which includes buttons
   questionContainerElement.classList.add("hide");
 
+  //posts score
+scoreEl.classList.remove("hide");
+document.getElementById("score").innerHTML = score; 
   //unhides the start button
   startBtn.classList.remove("hide");
+
+  //hides the timer
+  timerEl.classList.add("hide");
 
   //unhides the localStorageFeature
   localStorageFeatureElement.classList.remove("hide");
 
   //TODO: reset game timer variable so that the countdown starts again when player replays game
-  
+  clearFunction;
+  score = 0;
+  timeLeft = 85;
+  questionIndex = questions.length;
 }
