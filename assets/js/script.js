@@ -49,6 +49,7 @@ const questions = [
 //setting global variables
 const startBtnElement = document.getElementById("startBtn");
 const saveHighScoreButtonElement = document.getElementById("saveHighScoreButton")
+const highScoreInitialInputElement = document.getElementById("highScoreInitialInput")
 const questionContainerElement = document.getElementById("question-container");
 const questionElement = document.getElementById("question");
 const btnGridElement = document.getElementById("btnGrid");
@@ -62,6 +63,7 @@ const scoreEl = document.getElementById("score");
 var timerEl = document.getElementById("timer");
 // initializing variables for userinput answer, score, and timer
 let answer;
+let scoreToSave;
 var score = 0;
 var timeLeft = 85;
 // var questionIndex holds total number of questions
@@ -83,6 +85,8 @@ startBtn.addEventListener("click", () => {
 //Listens for save button to be clicked, saves initials to local storage
 saveHighScoreButton.addEventListener("click", () => {
 
+localStorage.setItem(highScoreInitialInputElement.value, scoreToSave)
+saveHighScoreButtonElement.classList.add("hide");
 })
 
 //---------------------------------------------------
@@ -231,11 +235,12 @@ function endGame() {
   highScoreLocalStorage = JSON.parse(
     localStorage.getItem("highScoreLocalStorage")
   );
-
+document.getElementById("scoreDisplay").innerHTML = score;
   //unhides the localStorageFeature
   localStorageFeatureElement.classList.remove("hide");
 
   clearInterval(myInterval);
+  scoreToSave = score;
   score = 0;
   timeLeft = 85;
   questionIndex = questions.length;
