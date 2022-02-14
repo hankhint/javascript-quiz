@@ -48,12 +48,14 @@ const questions = [
 
 //setting global variables
 const startBtnElement = document.getElementById("startBtn");
+const saveHighScoreButtonElement = document.getElementById("saveHighScoreButton")
 const questionContainerElement = document.getElementById("question-container");
 const questionElement = document.getElementById("question");
 const btnGridElement = document.getElementById("btnGrid");
 const localStorageFeatureElement = document.getElementById(
   "localStorageFeature"
 );
+const scoreDisplayElement = document.getElementById("scoreDisplay")
 const correctEl = document.querySelector("#trueBtn");
 const incorrectEl = document.querySelector("#falseBtn");
 const scoreEl = document.getElementById("score");
@@ -66,11 +68,22 @@ var timeLeft = 85;
 var questionIndex = questions.length;
 var myInterval;
 
+//initialize local storage that holds city names that have been searched
+if (localStorage.getItem("highScoreLocalStorage") == undefined) {
+  localStorage.setItem("highScoreLocalStorage", JSON.stringify({}));
+}
+
+
 // Listens for the start button to be clicked, starts countdown and game
 startBtn.addEventListener("click", () => {
   myInterval = setInterval(myTimer, 1000);
   startGame();
 });
+
+//Listens for save button to be clicked, saves initials to local storage
+saveHighScoreButton.addEventListener("click", () => {
+
+})
 
 //---------------------------------------------------
 //START: TRUE BUTTON LOGIC
@@ -165,17 +178,19 @@ incorrectEl.addEventListener("click", function () {
 function myTimer() {
   // As long as the `timeLeft` is greater than 1
   if (timeLeft > 1) {
-    //  console.log("the timer is at", timeLeft)
+
     // Set the `textContent` of `timerEl` to show the remaining seconds
     timerEl.innerHTML = timeLeft + " seconds remaining";
 
     // Decrement `timeLeft` by 1
     timeLeft--;
   } else if (timeLeft === 1) {
+
     // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
     timerEl.innerHTML = timeLeft + " second remaining";
     timeLeft--;
   } else {
+
     // Once `timeLeft` gets to 0, set `timerEl` to time is up to tell user game is over
     timerEl.innerHTML = "Time is up.";
 
@@ -213,10 +228,13 @@ function endGame() {
   //hides the timer
   timerEl.classList.add("hide");
 
+  highScoreLocalStorage = JSON.parse(
+    localStorage.getItem("highScoreLocalStorage")
+  );
+
   //unhides the localStorageFeature
   localStorageFeatureElement.classList.remove("hide");
 
-  //TODO: reset game timer variable so that the countdown starts again when player replays game
   clearInterval(myInterval);
   score = 0;
   timeLeft = 85;
