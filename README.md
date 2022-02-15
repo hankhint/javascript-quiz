@@ -20,13 +20,12 @@ When the game is over you can save your initials and your score.
 
 
 
-## Screenshot
+## Screenshots
+![js_3](https://user-images.githubusercontent.com/50533231/154135617-543a052c-0d8e-4f1f-8942-04f38440b49b.png)
 ![js_1](https://user-images.githubusercontent.com/50533231/154135602-10b7d77f-69c4-4883-a5a5-dd524cfb6731.png)
 ![js_2](https://user-images.githubusercontent.com/50533231/154135608-e4fe20dc-031a-450f-a7d5-8c7467b6865c.png)
-![js_3](https://user-images.githubusercontent.com/50533231/154135617-543a052c-0d8e-4f1f-8942-04f38440b49b.png)
 
 ## Link to the deployed site
-
 https://hankhint.github.io/jsquiz/
 
 
