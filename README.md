@@ -7,9 +7,6 @@ You have 85 seconds to finish.
 If you answer incorrectly you will lose time.
 When the game is over you can save your initials and your score.
 
-## Future version
-A future version will include implementation of features 2 - 5.  The logic is a work in progress.
-
 ## Features
 1. Timer starts when you click 'start,' and a question is presented
 
@@ -24,7 +21,9 @@ A future version will include implementation of features 2 - 5.  The logic is a 
 
 
 ## Screenshot
-![image](https://user-images.githubusercontent.com/50533231/137669140-11ae84b8-2b8e-41a6-af4a-c9500da23299.png)
+![js_1](https://user-images.githubusercontent.com/50533231/154135602-10b7d77f-69c4-4883-a5a5-dd524cfb6731.png)
+![js_2](https://user-images.githubusercontent.com/50533231/154135608-e4fe20dc-031a-450f-a7d5-8c7467b6865c.png)
+![js_3](https://user-images.githubusercontent.com/50533231/154135617-543a052c-0d8e-4f1f-8942-04f38440b49b.png)
 
 ## Link to the deployed site
 
